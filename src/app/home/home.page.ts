@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [IonicModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage {
   constructor() {}
