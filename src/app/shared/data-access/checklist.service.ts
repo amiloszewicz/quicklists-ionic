@@ -15,10 +15,24 @@ export class ChecklistService {
   add(checklist: Pick<Checklist, 'title'>) {
     const newChecklist = {
       ...checklist,
-      id: Date.now().toString(),
+      id: this.generateSlung(checklist.title),
     };
 
     this.checklists$.next([...this.checklists$.value, newChecklist]);
+  }
+
+  private generateSlung(title: string) {
+    let slug = title.toLowerCase().replace(/\s+/g, '-');
+
+    const matchingSlugs = this.checklists$.value.find(
+      (checklist) => checklist.id === slug
+    );
+
+    if (matchingSlugs) {
+      slug = slug + Date.now().toString();
+    }
+
+    return slug;
   }
 
   constructor() {}
