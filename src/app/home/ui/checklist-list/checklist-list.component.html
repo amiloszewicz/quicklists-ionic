@@ -1,0 +1,5 @@
+<ion-list lines="none">
+  <ion-item *ngFor="let checklist of checklists; trackBy: trackByFn">
+    <ion-label>{{ checklist.title }}</ion-label>
+  </ion-item>
+</ion-list>

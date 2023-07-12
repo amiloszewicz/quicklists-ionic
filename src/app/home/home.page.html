@@ -8,6 +8,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-modal
     [isOpen]="formModalIsOpen$ | async"
@@ -22,4 +23,9 @@
       ></app-form-modal>
     </ng-template>
   </ion-modal>
+  <app-checklist-list
+    *ngIf="checklists$ | async as checklists"
+    [checklists]="checklists"
+  >
+  </app-checklist-list>
 </ion-content>
