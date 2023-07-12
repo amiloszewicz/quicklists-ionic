@@ -26,7 +26,7 @@ export class ChecklistPage {
   formModalIsOpen$ = new BehaviorSubject<boolean>(false);
 
   checklistItemForm = this.fb.nonNullable.group({
-    title: ['Checklist', Validators.required],
+    title: ['', Validators.required],
   });
 
   constructor(
