@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
+import { ChecklistService } from '../shared/data-access/checklist.service';
 import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component';
 
 @Component({
@@ -16,9 +17,16 @@ import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component
 export class HomePage {
   formModalIsOpen$ = new BehaviorSubject<boolean>(false);
 
-  checklistForm = this.fb.group({
+  checklistForm = this.fb.nonNullable.group({
     title: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder) {}
+  addChecklist() {
+    this.checklistService.add(this.checklistForm.getRawValue());
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private checklistService: ChecklistService
+  ) {}
 }
