@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, map } from 'rxjs';
 import { Checklist } from '../interfaces/checklist';
 
 @Injectable({
@@ -19,6 +19,13 @@ export class ChecklistService {
     };
 
     this.checklists$.next([...this.checklists$.value, newChecklist]);
+  }
+
+  getChecklistById(id: string) {
+    return this.getChecklists().pipe(
+      filter((checklists) => checklists.length > 0),
+      map((checklists) => checklists.find((checklist) => checklist.id === id))
+    );
   }
 
   private generateSlung(title: string) {
