@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Checklist } from 'src/app/shared/interfaces/checklist';
 
 @Component({
   selector: 'app-checklist-list',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, RouterModule],
   templateUrl: './checklist-list.component.html',
   styleUrls: ['./checklist-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
