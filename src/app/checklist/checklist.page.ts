@@ -8,11 +8,17 @@ import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
 import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component';
 import { ChecklistItemService } from './data-access/checklist-item.service';
+import { ChecklistItemListComponent } from './ui/checklist-item-list/checklist-item-list.component';
 
 @Component({
   selector: 'app-checklist',
   standalone: true,
-  imports: [CommonModule, IonicModule, FormModalComponent],
+  imports: [
+    CommonModule,
+    IonicModule,
+    FormModalComponent,
+    ChecklistItemListComponent,
+  ],
   templateUrl: './checklist.page.html',
   styleUrls: ['./checklist.page.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
