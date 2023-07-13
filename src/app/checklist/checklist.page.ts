@@ -3,8 +3,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, switchMap } from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
+import { Checklist } from '../shared/interfaces/checklist';
 import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component';
 import { ChecklistItemService } from './data-access/checklist-item.service';
 
@@ -17,13 +18,28 @@ import { ChecklistItemService } from './data-access/checklist-item.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChecklistPage {
-  checklist$ = this.route.paramMap.pipe(
-    switchMap((paramMap) =>
-      this.checklistService.getChecklistById(paramMap.get('id') as string)
+  checklistAndItems$ = this.route.paramMap.pipe(
+    switchMap((params) =>
+      combineLatest([
+        this.checklistService
+          .getChecklistById(params.get('id') as string)
+          .pipe(filter((checklist): checklist is Checklist => !!checklist)),
+        this.checklistItemService.getItemsByChecklistId(
+          params.get('id') as string
+        ),
+      ])
     )
   );
 
   formModalIsOpen$ = new BehaviorSubject<boolean>(false);
+
+  vm$ = combineLatest([this.checklistAndItems$, this.formModalIsOpen$]).pipe(
+    map(([[checklist, items], formModalIsOpen]) => ({
+      checklist,
+      items,
+      formModalIsOpen,
+    }))
+  );
 
   checklistItemForm = this.fb.nonNullable.group({
     title: ['', Validators.required],

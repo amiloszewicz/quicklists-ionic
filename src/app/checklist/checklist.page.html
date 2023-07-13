@@ -1,9 +1,4 @@
-<ng-container
-  *ngIf="{
-    checklist: (checklist$ | async)!,
-    formModalIsOpen: (formModalIsOpen$ | async)!
-  } as vm"
->
+<ng-container *ngIf="vm$ | async as vm">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
