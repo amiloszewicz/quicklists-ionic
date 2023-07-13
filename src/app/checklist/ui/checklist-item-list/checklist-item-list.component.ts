@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ChecklistItem } from 'src/app/shared/interfaces/chhcecklist-item';
 
@@ -13,6 +19,7 @@ import { ChecklistItem } from 'src/app/shared/interfaces/chhcecklist-item';
 })
 export class ChecklistItemListComponent {
   @Input() checklistItems!: ChecklistItem[];
+  @Output() toggle = new EventEmitter<string>();
 
   trackByFn(index: number, item: ChecklistItem) {
     return item.id;

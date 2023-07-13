@@ -64,4 +64,8 @@ export class ChecklistPage {
       checklistId
     );
   }
+
+  toggleChecklistItem(itemId: string) {
+    this.checklistItemService.toggle(itemId);
+  }
 }

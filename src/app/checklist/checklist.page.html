@@ -16,6 +16,7 @@
   <ion-content>
     <app-checklist-item-list
       [checklistItems]="vm.items"
+      (toggle)="toggleChecklistItem($event)"
     ></app-checklist-item-list>
   </ion-content>
 
