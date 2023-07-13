@@ -1,9 +1,12 @@
 <ion-list lines="none">
-  <ion-item
-    *ngFor="let item of checklistItems; trackBy: trackByFn"
-    (click)="toggle.emit(item.id)"
-  >
-    <ion-label>{{ item.title }}</ion-label>
-    <ion-checkbox slot="end" [checked]="item.checked"></ion-checkbox>
+  <ion-item *ngFor="let item of checklistItems; trackBy: trackByFn">
+    <ion-checkbox
+      justify="space-between"
+      labelPlacement="start"
+      (ionChange)="toggle.emit(item.id)"
+      [checked]="item.checked"
+    >
+      {{ item.title }}
+    </ion-checkbox>
   </ion-item>
 </ion-list>
