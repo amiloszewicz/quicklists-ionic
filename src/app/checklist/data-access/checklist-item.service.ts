@@ -36,5 +36,13 @@ export class ChecklistItemService {
     this.checklistItems$.next(newItems);
   }
 
+  reset(checklistId: string) {
+    const newItems = this.checklistItems$.value.map((item) =>
+      item.checklistId === checklistId ? { ...item, checked: false } : item
+    );
+
+    this.checklistItems$.next(newItems);
+  }
+
   constructor() {}
 }

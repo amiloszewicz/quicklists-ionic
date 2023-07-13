@@ -68,4 +68,8 @@ export class ChecklistPage {
   toggleChecklistItem(itemId: string) {
     this.checklistItemService.toggle(itemId);
   }
+
+  resetChecklistItems(checklistId: string) {
+    this.checklistItemService.reset(checklistId);
+  }
 }
