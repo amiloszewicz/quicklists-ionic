@@ -9,7 +9,7 @@ import {
   tap,
 } from 'rxjs';
 import { ChecklistItemService } from 'src/app/checklist/data-access/checklist-item.service';
-import { Checklist } from '../interfaces/checklist';
+import { AddChecklist, Checklist } from '../interfaces/checklist';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -72,7 +72,7 @@ export class ChecklistService {
     this.checklists$.next(modifiedChecklists);
   }
 
-  update(id: string, editedData: Checklist) {
+  update(id: string, editedData: AddChecklist) {
     const modifiedChecklists = this.checklists$.value.map((checklist) =>
       checklist.id === id
         ? { ...checklist, title: editedData.title }
