@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Observable, from, map, shareReplay, switchMap, tap } from 'rxjs';
+import { Observable, from, map, shareReplay, switchMap, take, tap } from 'rxjs';
 import { Checklist } from '../interfaces/checklist';
 import { ChecklistItem } from '../interfaces/chhcecklist-item';
 
@@ -28,4 +28,20 @@ export class StorageService {
   );
 
   constructor(private ionicStorage: Storage) {}
+
+  saveChecklist(checklists: Checklist[]) {
+    if (this.#checklistHasLoaded) {
+      this.storage$.pipe(take(1)).subscribe((storage) => {
+        storage.set('checklists', checklists);
+      });
+    }
+  }
+
+  saveChecklistItems(items: ChecklistItem[]) {
+    if (this.#checklistItemsHasLoaded) {
+      this.storage$.pipe(take(1)).subscribe((storage) => {
+        storage.set('checklistsItems', items);
+      });
+    }
+  }
 }
