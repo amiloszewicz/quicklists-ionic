@@ -13,8 +13,8 @@
   <ion-modal
     *ngIf="{
       checklistIsBeingEdited: checklistIsBeingEdited$ | async,
-      isOpen: formModalIsOpen$ | async
     } as vm"
+    [isOpen]="formModalIsOpen$ | async"
     [canDismiss]="true"
     (ionModalDidDismiss)="formModalIsOpen$.next(false); checklistIsBeingEdited$.next(null)"
   >
