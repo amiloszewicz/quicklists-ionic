@@ -70,7 +70,15 @@ export class ChecklistService {
     this.checklists$.next(modifiedChecklists);
   }
 
-  update(id: string, editedData: Checklist) {}
+  update(id: string, editedData: Checklist) {
+    const modifiedChecklists = this.checklists$.value.map((checklist) =>
+      checklist.id === id
+        ? { ...checklist, title: editedData.title }
+        : checklist
+    );
+
+    this.checklists$.next(modifiedChecklists);
+  }
 
   constructor(private storageService: StorageService) {}
 }
