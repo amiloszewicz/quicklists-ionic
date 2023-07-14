@@ -72,4 +72,8 @@ export class ChecklistPage {
   resetChecklistItems(checklistId: string) {
     this.checklistItemService.reset(checklistId);
   }
+
+  deleteChecklistItem(id: string) {
+    this.checklistItemService.remove(id);
+  }
 }

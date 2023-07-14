@@ -20,6 +20,7 @@
     <app-checklist-item-list
       [checklistItems]="vm.items"
       (toggle)="toggleChecklistItem($event)"
+      (delete)="deleteChecklistItem($event)"
     ></app-checklist-item-list>
   </ion-content>
 

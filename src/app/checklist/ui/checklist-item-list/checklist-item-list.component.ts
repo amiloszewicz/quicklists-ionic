@@ -20,6 +20,8 @@ import { ChecklistItem } from 'src/app/shared/interfaces/chhcecklist-item';
 export class ChecklistItemListComponent {
   @Input() checklistItems!: ChecklistItem[];
   @Output() toggle = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<ChecklistItem>();
 
   trackByFn(index: number, item: ChecklistItem) {
     return item.id;
