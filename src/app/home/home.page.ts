@@ -33,6 +33,10 @@ export class HomePage {
     this.checklistService.add(this.checklistForm.getRawValue());
   }
 
+  deleteChecklist(id: string) {
+    this.checklistService.remove(id);
+  }
+
   constructor(
     private fb: FormBuilder,
     private checklistService: ChecklistService

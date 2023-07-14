@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Checklist } from 'src/app/shared/interfaces/checklist';
@@ -14,6 +20,8 @@ import { Checklist } from 'src/app/shared/interfaces/checklist';
 })
 export class ChecklistListComponent {
   @Input() checklists!: Checklist[];
+  @Output() delete = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<Checklist>();
 
   trackByFn(index: number, checklist: Checklist) {
     return checklist.id;

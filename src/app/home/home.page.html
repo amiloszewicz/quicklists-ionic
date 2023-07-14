@@ -26,6 +26,7 @@
   <app-checklist-list
     *ngIf="checklists$ | async as checklists"
     [checklists]="checklists"
+    (delete)="deleteChecklist($event)"
   >
   </app-checklist-list>
 </ion-content>
