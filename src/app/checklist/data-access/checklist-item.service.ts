@@ -56,5 +56,17 @@ export class ChecklistItemService {
       });
   }
 
+  update() {}
+
+  remove(id: string) {
+    const modifiedItems = this.checklistItems$.value.filter(
+      (item) => item.id !== id
+    );
+
+    this.checklistItems$.next(modifiedItems);
+  }
+
+  removeAllItemsForChecklist(checklistId: string) {}
+
   constructor(private storageService: StorageService) {}
 }
