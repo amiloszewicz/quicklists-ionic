@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { BehaviorSubject, combineLatest, filter, map, switchMap } from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
+import { ChecklistItem } from '../shared/interfaces/chhcecklist-item';
 import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component';
 import { ChecklistItemService } from './data-access/checklist-item.service';
 import { ChecklistItemListComponent } from './ui/checklist-item-list/checklist-item-list.component';
@@ -38,13 +39,21 @@ export class ChecklistPage {
   );
 
   formModalIsOpen$ = new BehaviorSubject<boolean>(false);
+  checklistItemIsBeingEdited$ = new BehaviorSubject<string | null>(null);
 
-  vm$ = combineLatest([this.checklistAndItems$, this.formModalIsOpen$]).pipe(
-    map(([[checklist, items], formModalIsOpen]) => ({
-      checklist,
-      items,
-      formModalIsOpen,
-    }))
+  vm$ = combineLatest([
+    this.checklistAndItems$,
+    this.formModalIsOpen$,
+    this.checklistItemIsBeingEdited$,
+  ]).pipe(
+    map(
+      ([[checklist, items], formModalIsOpen, checklistItemIsBeingEdited]) => ({
+        checklist,
+        items,
+        formModalIsOpen,
+        checklistItemIsBeingEdited,
+      })
+    )
   );
 
   checklistItemForm = this.fb.nonNullable.group({
@@ -75,5 +84,20 @@ export class ChecklistPage {
 
   deleteChecklistItem(id: string) {
     this.checklistItemService.remove(id);
+  }
+
+  editChecklistItem(checklistItemId: string) {
+    this.checklistItemService.update(
+      checklistItemId,
+      this.checklistItemForm.getRawValue()
+    );
+  }
+
+  openEditModal(checklistItem: ChecklistItem) {
+    this.checklistItemForm.patchValue({
+      title: checklistItem.title,
+    });
+    this.checklistItemIsBeingEdited$.next(checklistItem.id);
+    this.formModalIsOpen$.next(true);
   }
 }

@@ -21,6 +21,7 @@
       [checklistItems]="vm.items"
       (toggle)="toggleChecklistItem($event)"
       (delete)="deleteChecklistItem($event)"
+      (edit)="openEditModal($event)"
     ></app-checklist-item-list>
   </ion-content>
 
@@ -28,13 +29,13 @@
     <ion-modal
       [isOpen]="vm.formModalIsOpen"
       [canDismiss]="true"
-      (ionModalDidDismiss)="formModalIsOpen$.next(false)"
+      (ionModalDidDismiss)="formModalIsOpen$.next(false); checklistItemIsBeingEdited$.next(null)"
     >
       <ng-template>
         <app-form-modal
-          title="Create item"
+          [title]="vm.checklistItemIsBeingEdited ? 'Edit item' : 'Create item'"
           [formGroup]="checklistItemForm"
-          (save)="addChecklistItem(vm.checklist.id)"
+          (save)="vm.checklistItemIsBeingEdited ? editChecklistItem(vm.checklistItemIsBeingEdited) : addChecklistItem(vm.checklist.id)"
         >
         </app-form-modal>
       </ng-template>
