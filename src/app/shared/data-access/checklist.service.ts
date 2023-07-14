@@ -8,6 +8,7 @@ import {
   take,
   tap,
 } from 'rxjs';
+import { ChecklistItemService } from 'src/app/checklist/data-access/checklist-item.service';
 import { Checklist } from '../interfaces/checklist';
 import { StorageService } from './storage.service';
 
@@ -67,6 +68,7 @@ export class ChecklistService {
       (checklist) => checklist.id !== id
     );
 
+    this.checklistsItemService.removeAllItemsForChecklist(id);
     this.checklists$.next(modifiedChecklists);
   }
 
@@ -80,5 +82,8 @@ export class ChecklistService {
     this.checklists$.next(modifiedChecklists);
   }
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private checklistsItemService: ChecklistItemService
+  ) {}
 }
