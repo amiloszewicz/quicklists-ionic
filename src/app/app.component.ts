@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ChecklistItemService } from './checklist/data-access/checklist-item.service';
+import { ChecklistService } from './shared/data-access/checklist.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +12,13 @@ import { IonicModule } from '@ionic/angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(
+    private checklistService: ChecklistService,
+    private checklistsItems: ChecklistItemService
+  ) {}
+
+  ngOnInit() {
+    this.checklistService.load();
+    this.checklistsItems.load();
+  }
 }
