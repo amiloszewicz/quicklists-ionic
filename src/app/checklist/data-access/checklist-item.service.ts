@@ -56,7 +56,11 @@ export class ChecklistItemService {
       });
   }
 
-  update() {}
+  update(id: string, editedItem: AddChecklistItem) {
+    const newItems = this.checklistItems$.value.map((item) =>
+      item.id === id ? { ...item, title: editedItem.title } : item
+    );
+  }
 
   remove(id: string) {
     const modifiedItems = this.checklistItems$.value.filter(
