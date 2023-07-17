@@ -98,6 +98,10 @@ export class ChecklistPage {
   }
 
   editChecklistItem(checklistItemId: string) {
+    console.log(
+      '🚀 ~ file: checklist.page.ts:101 ~ ChecklistPage ~ editChecklistItem ~ checklistItemId:',
+      checklistItemId
+    );
     this.checklistItemService.update(
       checklistItemId,
       this.checklistItemForm.getRawValue()

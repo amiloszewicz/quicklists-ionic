@@ -57,9 +57,15 @@ export class ChecklistItemService {
   }
 
   update(id: string, editedItem: AddChecklistItem) {
+    console.log(
+      '🚀 ~ file: checklist-item.service.ts:60 ~ ChecklistItemService ~ update ~ editedItem:',
+      editedItem
+    );
     const newItems = this.checklistItems$.value.map((item) =>
       item.id === id ? { ...item, title: editedItem.title } : item
     );
+
+    this.checklistItems$.next(newItems);
   }
 
   remove(id: string) {
