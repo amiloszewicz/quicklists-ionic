@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonRouterOutlet, IonicModule } from '@ionic/angular';
 import { BehaviorSubject, combineLatest, filter, map, switchMap } from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
@@ -61,6 +61,7 @@ export class ChecklistPage {
   });
 
   constructor(
+    public routerOutlet: IonRouterOutlet,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private checklistService: ChecklistService,

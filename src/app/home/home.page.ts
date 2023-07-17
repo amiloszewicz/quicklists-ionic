@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonRouterOutlet, IonicModule } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
@@ -52,6 +52,7 @@ export class HomePage {
   }
 
   constructor(
+    public routerOutlet: IonRouterOutlet,
     private fb: FormBuilder,
     private checklistService: ChecklistService
   ) {}

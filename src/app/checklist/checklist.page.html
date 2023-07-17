@@ -28,6 +28,7 @@
   <ion-content>
     <ion-modal
       [isOpen]="vm.formModalIsOpen"
+      [presentingElement]="routerOutlet.nativeEl"
       [canDismiss]="true"
       (ionModalDidDismiss)="formModalIsOpen$.next(false); checklistItemIsBeingEdited$.next(null)"
     >
