@@ -1,7 +1,12 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IonContent, IonRouterOutlet, IonicModule } from '@ionic/angular';
+import {
+  AlertController,
+  IonContent,
+  IonRouterOutlet,
+  IonicModule,
+} from '@ionic/angular';
 import { BehaviorSubject, tap } from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
@@ -42,8 +47,28 @@ export class HomePage {
     this.checklistService.add(this.checklistForm.getRawValue());
   }
 
-  deleteChecklist(id: string) {
-    this.checklistService.remove(id);
+  async deleteChecklist(id: string) {
+    const alert = await this.alertController.create({
+      header: '',
+      subHeader: '',
+      buttons: [
+        {
+          text: 'Delete',
+          cssClass: 'btn btn-danger confirm-delete-button',
+          role: 'destructive',
+          handler: () => {
+            this.checklistService.remove(id);
+          },
+        },
+        {
+          text: 'Cancel',
+          cssClass: 'cancel-delete-button',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    alert.present();
   }
 
   editChecklist(checklistId: string) {
@@ -61,6 +86,7 @@ export class HomePage {
   constructor(
     public routerOutlet: IonRouterOutlet,
     private fb: FormBuilder,
-    private checklistService: ChecklistService
+    private checklistService: ChecklistService,
+    private alertController: AlertController
   ) {}
 }
