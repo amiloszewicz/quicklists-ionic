@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title>{{ title }}</ion-title>
+    <ion-title color="dark">{{ title }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         <ion-icon name="close" slot="icon-only"></ion-icon>
@@ -12,8 +12,14 @@
 <ion-content>
   <form [formGroup]="formGroup" (ngSubmit)="handleSave()">
     <ion-item *ngFor="let control of formGroup.controls | keyvalue">
-      <ion-label position="stacked">{{ control.key }}</ion-label>
-      <ion-input type="text" [formControlName]="control.key"></ion-input>
+      <ion-label position="stacked" color="primary">{{
+        control.key
+      }}</ion-label>
+      <ion-input
+        type="text"
+        [formControlName]="control.key"
+        color="success"
+      ></ion-input>
     </ion-item>
     <ion-button
       color="success"
