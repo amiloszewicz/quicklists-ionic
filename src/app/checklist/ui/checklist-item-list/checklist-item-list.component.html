@@ -7,9 +7,9 @@
   </ion-card-content>
 </ion-card>
 
-<ion-list lines="none">
+<ion-list lines="insert">
   <ion-item-sliding *ngFor="let item of checklistItems; trackBy: trackByFn">
-    <ion-item>
+    <ion-item color="">
       <ion-checkbox
         justify="space-between"
         labelPlacement="start"
@@ -17,7 +17,9 @@
         [checked]="item.checked"
         color="success"
       >
-        {{ item.title }}
+        <span color="dark">
+          {{ item.title }}
+        </span>
       </ion-checkbox>
     </ion-item>
 

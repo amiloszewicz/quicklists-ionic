@@ -1,0 +1,6 @@
+span {
+  font-weight: bold;
+  margin: 20px;
+  white-space: normal;
+  color: var(--ion-color-dark)
+}
