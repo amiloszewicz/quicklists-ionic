@@ -1,8 +1,8 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IonRouterOutlet, IonicModule } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { IonContent, IonRouterOutlet, IonicModule } from '@ionic/angular';
+import { BehaviorSubject, tap } from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
 import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component';
@@ -24,8 +24,15 @@ import { ChecklistListComponent } from './ui/checklist-list/checklist-list.compo
 })
 export class HomePage {
   formModalIsOpen$ = new BehaviorSubject<boolean>(false);
-  checklists$ = this.checklistService.getChecklists();
+  checklists$ = this.checklistService.getChecklists().pipe(
+    tap(() => {
+      setTimeout(() => {
+        this.ionContent.scrollToBottom(200);
+      }, 0);
+    })
+  );
   checklistIsBeingEdited$ = new BehaviorSubject<string | null>(null);
+  @ViewChild(IonContent) ionContent!: IonContent;
 
   checklistForm = this.fb.nonNullable.group({
     title: ['', Validators.required],

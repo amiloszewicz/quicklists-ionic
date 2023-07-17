@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IonRouterOutlet, IonicModule } from '@ionic/angular';
-import { BehaviorSubject, combineLatest, filter, map, switchMap } from 'rxjs';
+import { IonContent, IonRouterOutlet, IonicModule } from '@ionic/angular';
+import {
+  BehaviorSubject,
+  combineLatest,
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { ChecklistService } from '../shared/data-access/checklist.service';
 import { Checklist } from '../shared/interfaces/checklist';
 import { ChecklistItem } from '../shared/interfaces/chhcecklist-item';
@@ -25,15 +32,18 @@ import { ChecklistItemListComponent } from './ui/checklist-item-list/checklist-i
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChecklistPage {
+  @ViewChild(IonContent) ionContent!: IonContent;
   checklistAndItems$ = this.route.paramMap.pipe(
     switchMap((params) =>
       combineLatest([
         this.checklistService
           .getChecklistById(params.get('id') as string)
           .pipe(filter((checklist): checklist is Checklist => !!checklist)),
-        this.checklistItemService.getItemsByChecklistId(
-          params.get('id') as string
-        ),
+        this.checklistItemService
+          .getItemsByChecklistId(params.get('id') as string)
+          .pipe(
+            tap(() => setTimeout(() => this.ionContent.scrollToBottom(200), 0))
+          ),
       ])
     )
   );
