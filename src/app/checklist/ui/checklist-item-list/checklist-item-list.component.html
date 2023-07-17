@@ -21,10 +21,13 @@
     </ion-item>
 
     <ion-item-options slot="end">
-      <ion-item-option color="light" (click)="edit.emit(item)">
+      <ion-item-option color="light" (click)="edit.emit(item); closeItems()">
         <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
       </ion-item-option>
-      <ion-item-option color="danger" (click)="delete.emit(item.id)">
+      <ion-item-option
+        color="danger"
+        (click)="delete.emit(item.id); closeItems()"
+      >
         <ion-icon name="trash" slot="icon-only"></ion-icon>
       </ion-item-option>
     </ion-item-options>

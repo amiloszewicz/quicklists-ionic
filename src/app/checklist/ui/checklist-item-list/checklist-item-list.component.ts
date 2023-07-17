@@ -5,8 +5,9 @@ import {
   EventEmitter,
   Input,
   Output,
+  ViewChild,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonList, IonicModule } from '@ionic/angular';
 import { ChecklistItem } from 'src/app/shared/interfaces/chhcecklist-item';
 
 @Component({
@@ -22,6 +23,11 @@ export class ChecklistItemListComponent {
   @Output() toggle = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<ChecklistItem>();
+  @ViewChild(IonList) checklistList!: IonList;
+
+  async closeItems() {
+    await this.checklistList.closeSlidingItems();
+  }
 
   trackByFn(index: number, item: ChecklistItem) {
     return item.id;
