@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>{{ title }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
@@ -16,7 +16,7 @@
       <ion-input type="text" [formControlName]="control.key"></ion-input>
     </ion-item>
     <ion-button
-      color="dark"
+      color="success"
       expand="full"
       type="submit"
       [disabled]="!formGroup.valid"

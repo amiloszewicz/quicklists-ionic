@@ -39,9 +39,9 @@ ion-title img {
 }
 
 ion-content {
-  --ion-background-color: var(--ion-color-primary);
+  --ion-background-color: var(--ion-color-light);
 
   ion-item-sliding {
-    --ion-background-color: var(--ion-color-light);
+    --ion-background-color: var(--ion-color-secondary);
   }
 }
