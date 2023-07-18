@@ -8,35 +8,41 @@
 </ion-card>
 
 <ion-list lines="none">
-  <ion-item-sliding *ngFor="let checklist of checklists; trackBy: trackByFn">
-    <ion-item
-      button
-      routerLink="/checklist/{{ checklist.id }}"
-      routerDirection="forward"
-    >
-      <ion-label>{{ checklist.title }}</ion-label>
-      <!-- <ion-badge slot="end">12</ion-badge> -->
-    </ion-item>
+  <ion-reorder-group
+    [disabled]="false"
+    (ionItemReorder)="handleReorder($any($event))"
+  >
+    <ion-item-sliding *ngFor="let checklist of checklists; trackBy: trackByFn">
+      <ion-item
+        button
+        routerLink="/checklist/{{ checklist.id }}"
+        routerDirection="forward"
+      >
+        <ion-label>{{ checklist.title }}</ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+        <!-- <ion-badge slot="end">12</ion-badge> -->
+      </ion-item>
 
-    <ion-item-options side="end">
-      <ion-item-option
-        color="warning"
-        (click)="edit.emit(checklist); closeItems()"
-      >
-        <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
-      </ion-item-option>
-      <ion-item-option
-        color="light"
-        (click)="status.emit(checklist); closeItems()"
-      >
-        <ion-icon name="information-outline" slot="icon-only"></ion-icon>
-      </ion-item-option>
-      <ion-item-option
-        color="danger"
-        (click)="delete.emit(checklist.id); closeItems()"
-      >
-        <ion-icon name="trash" slot="icon-only"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
+      <ion-item-options side="end">
+        <ion-item-option
+          color="warning"
+          (click)="edit.emit(checklist); closeItems()"
+        >
+          <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+        <ion-item-option
+          color="light"
+          (click)="status.emit(checklist); closeItems()"
+        >
+          <ion-icon name="information-outline" slot="icon-only"></ion-icon>
+        </ion-item-option>
+        <ion-item-option
+          color="danger"
+          (click)="delete.emit(checklist.id); closeItems()"
+        >
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-reorder-group>
 </ion-list>
