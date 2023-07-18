@@ -17,9 +17,16 @@
         [checked]="item.checked"
         color="success"
       >
-        <span color="dark">
-          {{ item.title }}
+        <span *ngIf="item.checked; else notStrikethroughText" color="dark">
+          <s>
+            {{ item.title }}
+          </s>
         </span>
+        <ng-template #notStrikethroughText>
+          <span color="dark">
+            {{ item.title }}
+          </span>
+        </ng-template>
       </ion-checkbox>
     </ion-item>
 
