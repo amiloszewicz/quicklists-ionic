@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent, IonRouterOutlet, IonicModule } from '@ionic/angular';
+import {
+  AlertController,
+  IonContent,
+  IonRouterOutlet,
+  IonicModule,
+} from '@ionic/angular';
 import {
   BehaviorSubject,
   combineLatest,
@@ -75,7 +80,8 @@ export class ChecklistPage {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private checklistService: ChecklistService,
-    private checklistItemService: ChecklistItemService
+    private checklistItemService: ChecklistItemService,
+    private alertController: AlertController
   ) {}
 
   addChecklistItem(checklistId: string) {
@@ -93,8 +99,26 @@ export class ChecklistPage {
     this.checklistItemService.reset(checklistId);
   }
 
-  deleteChecklistItem(id: string) {
-    this.checklistItemService.remove(id);
+  async deleteChecklistItem(id: string) {
+    const alert = await this.alertController.create({
+      header: '',
+      subHeader: '',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            this.checklistItemService.remove(id);
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    alert.present();
   }
 
   editChecklistItem(checklistItemId: string) {
