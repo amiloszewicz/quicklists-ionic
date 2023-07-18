@@ -23,6 +23,7 @@ export class ChecklistListComponent {
   @Input() checklists!: Checklist[];
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<Checklist>();
+  @Output() status = new EventEmitter<Checklist>();
   @ViewChild(IonList) checklistList!: IonList;
 
   async closeItems() {

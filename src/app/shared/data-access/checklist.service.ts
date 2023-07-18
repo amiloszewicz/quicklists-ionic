@@ -31,6 +31,7 @@ export class ChecklistService {
     const newChecklist = {
       ...checklist,
       id: this.generateSlung(checklist.title),
+      date: Date.now(),
     };
 
     this.checklists$.next([...this.checklists$.value, newChecklist]);

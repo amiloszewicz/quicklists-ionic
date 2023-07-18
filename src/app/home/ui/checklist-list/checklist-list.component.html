@@ -15,6 +15,7 @@
       routerDirection="forward"
     >
       <ion-label>{{ checklist.title }}</ion-label>
+      <!-- <ion-badge slot="end">12</ion-badge> -->
     </ion-item>
 
     <ion-item-options side="end">
@@ -23,6 +24,12 @@
         (click)="edit.emit(checklist); closeItems()"
       >
         <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+      </ion-item-option>
+      <ion-item-option
+        color="light"
+        (click)="status.emit(checklist); closeItems()"
+      >
+        <ion-icon name="information-outline" slot="icon-only"></ion-icon>
       </ion-item-option>
       <ion-item-option
         color="danger"

@@ -54,7 +54,7 @@ export class HomePage {
       buttons: [
         {
           text: 'Delete',
-          cssClass: 'btn btn-danger confirm-delete-button',
+          cssClass: 'confirm-delete-button',
           role: 'destructive',
           handler: () => {
             this.checklistService.remove(id);
@@ -81,6 +81,16 @@ export class HomePage {
     });
     this.checklistIsBeingEdited$.next(checklist.id);
     this.formModalIsOpen$.next(true);
+  }
+
+  async statusChecklist(checklist: Checklist) {
+    const status = await this.alertController.create({
+      header: 'Serial number',
+      message: `${checklist.id}`,
+      buttons: ['OK'],
+    });
+
+    await status.present();
   }
 
   constructor(
