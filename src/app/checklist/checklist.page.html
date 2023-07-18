@@ -1,20 +1,9 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <ion-header class="ion-no-border">
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
-      <ion-title>{{ vm.checklist.title }}</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="resetChecklistItems(vm.checklist.id)">
-          <ion-icon name="refresh" slot="icon-only"></ion-icon>
-        </ion-button>
-        <ion-button (click)="formModalIsOpen$.next(true)">
-          <ion-icon name="add" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <app-checklist-header
+    [checklist]="vm.checklist"
+    (reset)="resetChecklistItems($event)"
+    (openModal)="formModalIsOpen$.next($event)"
+  ></app-checklist-header>
 
   <ion-content>
     <app-checklist-item-list

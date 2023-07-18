@@ -21,6 +21,7 @@ import { Checklist } from '../shared/interfaces/checklist';
 import { ChecklistItem } from '../shared/interfaces/chhcecklist-item';
 import { FormModalComponent } from '../shared/ui/form-modal/form-modal.component';
 import { ChecklistItemService } from './data-access/checklist-item.service';
+import { ChecklistHeaderComponent } from './ui/checklist-header/checklist-header.component';
 import { ChecklistItemListComponent } from './ui/checklist-item-list/checklist-item-list.component';
 
 @Component({
@@ -31,6 +32,7 @@ import { ChecklistItemListComponent } from './ui/checklist-item-list/checklist-i
     IonicModule,
     FormModalComponent,
     ChecklistItemListComponent,
+    ChecklistHeaderComponent,
   ],
   templateUrl: './checklist.page.html',
   styleUrls: ['./checklist.page.css'],
